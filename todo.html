@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .todo-actions button {
+      margin-left: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      border: none !important;
+      border-radius: 4px !important;
+      font-size: 0.85rem !important;
+      cursor: pointer !important;
+    }
+    .edit-btn { background: #1abc9c !important; color: #fff !important; }
+    .delete-btn { background: #e74c3c !important; color: #fff !important; }
+    .save-btn { background: #2ecc71 !important; color: #fff !important; }
+    .cancel-btn { background: #95a5a6 !important; color: #fff !important; }
+    .todo-item {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      background: #f1f1f1 !important;
+      padding: 0.7rem !important;
+      margin: 0.5rem 0 !important;
+      border-radius: 6px !important;
+    }
+    .todo-left {
+      display: flex !important;
+      align-items: center !important;
+      flex-grow: 1 !important;
+    }
+    .todo-text {
+      font-size: 1rem !important;
+      flex-grow: 1 !important;
+      text-align: left !important;
+      padding-left: 0.5rem !important;
+    }
+    .todo-text.completed {
+      text-decoration: line-through !important;
+      color: #999 !important;
+    }
+    .todo-controls {
+      display: flex !important;
+      justify-content: space-between !important;
+      margin-bottom: 1rem !important;
+    }
+    button:hover {
+      opacity: 0.9 !important;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>To-Do List</h1>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="products.html">Products</a>
+  </nav>
+  <section class="container">
+    <div class="todo-card">
+      <h2>Manage Your Tasks</h2>
+      <div class="todo-controls">
+        <input type="text" id="todo-input" placeholder="Add a new task..." />
+        <button onclick="addTodo()">Add</button>
+      </div>
+      <div id="todo-list"></div>
+    </div>
+  </section>
+  <script>
+    const todoInput = document.getElementById('todo-input');
+    const todoList = document.getElementById('todo-list');
+
+    function loadTodos() {
+      const todos = JSON.parse(localStorage.getItem('todos')) || [];
+      todoList.innerHTML = '';
+      todos.forEach((todo, index) => {
+        const completedClass = todo.completed ? 'completed' : '';
+        todoList.innerHTML += `
+          <div class="todo-item" data-index="${index}">
+            <div class="todo-left">
+              <span class="todo-text ${completedClass}">${todo.text}</span>
+            </div>
+            <div class="todo-actions">
+              <button class="edit-btn" onclick="editTodo(${index})">Edit</button>
+              <button class="delete-btn" onclick="deleteTodo(${index})">Delete</button>
+            </div>
+          </div>`;
+      });
+    }
+
+    function addTodo() {
+      const task = todoInput.value.trim();
+      if (!task) return;
+      const todos = JSON.parse(localStorage.getItem('todos')) || [];
+      todos.push({ text: task, completed: false });
+      localStorage.setItem('todos', JSON.stringify(todos));
+      todoInput.value = '';
+      loadTodos();
+    }
+
+    function deleteTodo(index) {
+      const todos = JSON.parse(localStorage.getItem('todos')) || [];
+      todos.splice(index, 1);
+      localStorage.setItem('todos', JSON.stringify(todos));
+      loadTodos();
+    }
+
+    function editTodo(index) {
+      const todos = JSON.parse(localStorage.getItem('todos')) || [];
+      const todoItem = document.querySelector(`.todo-item[data-index="${index}"]`);
+      const originalText = todos[index].text;
+      todoItem.innerHTML = `
+        <div class="todo-left">
+          <input type="text" id="edit-input" value="${originalText}" style="flex-grow: 1; margin-right: 0.5rem;" />
+        </div>
+        <div class="todo-actions">
+          <button class="save-btn" onclick="saveTodo(${index})">Save</button>
+          <button class="cancel-btn" onclick="loadTodos()">Cancel</button>
+        </div>`;
+    }
+
+    function saveTodo(index) {
+      const todos = JSON.parse(localStorage.getItem('todos')) || [];
+      const newValue = document.getElementById('edit-input').value.trim();
+      if (!newValue) return;
+      todos[index].text = newValue;
+      localStorage.setItem('todos', JSON.stringify(todos));
+      loadTodos();
+    }
+
+    window.onload = loadTodos;
+  </script>
+</body>
+</html>

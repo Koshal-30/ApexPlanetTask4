@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root {
+      --bg-color: #f9f9f9;
+      --text-color: #2c3e50;
+      --header-bg: #3498db;
+      --nav-bg: #2980b9;
+      --card-bg: #fff;
+    }
+    body.dark-mode {
+      --bg-color: #121212;
+      --text-color: #f5f5f5;
+      --header-bg: #222;
+      --nav-bg: #333;
+      --card-bg: #1e1e1e;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      transition: background 0.5s ease, color 0.5s ease;
+      animation: fadeIn 1s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    header {
+      background-color: var(--header-bg);
+      color: white;
+      padding: 2.5rem 1rem 1.5rem 1rem;
+      text-align: center;
+      position: relative;
+      animation: slideDown 0.8s ease;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .toggle-btn {
+      position: absolute !important;
+      top: 0.75rem !important;
+      right: 0.75rem !important;
+      background: none !important;
+      border: 2px solid #fff !important;
+      color: #fff !important;
+      padding: 0.2rem 0.6rem !important;
+      border-radius: 50% !important;
+      cursor: pointer !important;
+      z-index: 1 !important;
+      font-size: 0.8rem !important;
+    }
+    nav {
+      background-color: var(--nav-bg);
+      padding: 1rem;
+      text-align: center;
+      animation: fadeIn 1.5s ease;
+    }
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ecf0f1;
+      text-decoration: underline;
+    }
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+      opacity: 0;
+      animation: fadeSection 0.8s forwards ease-in-out;
+      animation-delay: 0.3s;
+    }
+    @keyframes fadeSection {
+      to {
+        opacity: 1;
+      }
+    }
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .project, .experience, .education {
+      margin-bottom: 1.5rem;
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+    .project:hover, .experience:hover, .education:hover {
+      transform: scale(1.02);
+    }
+    .btn {
+      background: #3498db;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      margin: 0.5rem 0.5rem 0.5rem 0;
+      display: inline-block;
+      transition: background 0.3s, transform 0.2s ease;
+    }
+    .btn:hover {
+      background: #1f6faf;
+      transform: translateY(-2px);
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .skill-card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .skill-card img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 0.5rem;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="toggle-btn" onclick="document.body.classList.toggle('dark-mode')">☀️</button>
+    <h1>My Portfolio</h1>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="todo.html">To-Do</a>
+    <a href="products.html">Products</a>
+  </nav>
+
+  <section class="section" id="about">
+    <h2>About Me</h2>
+    <p>Hi, I'm a tech enthusiast and aspiring software engineer with a strong passion for building efficient, scalable, and impactful digital experiences. I specialize in full-stack web development and have hands-on experience in developing responsive websites, interactive applications, and intelligent machine learning models. Currently pursuing my B.Tech in Computer Science, I thrive on continuous learning and love solving complex problems through technology. When I'm not coding, you can find me exploring new tools, working on personal projects, or diving into open-source contributions to sharpen my skills and collaborate with the developer community.</p>
+</section>
+
+
+  <section class="section" id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+        <div>HTML</div>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+        <div>CSS</div>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+        <div>JavaScript</div>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+        <div>React</div>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+        <div>Node.js</div>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+        <div>Python</div>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+        <div>C++</div>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+        <div>Java</div>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL">
+        <div>SQL</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <h2>Projects</h2>
+    <div class="project">
+      <h3>Voice Emotion Recognition</h3>
+      <p>A system that classifies emotions from audio using CNN and MFCC features.</p>
+    </div>
+    <div class="project">
+      <h3>Real-Time Hand Gesture Detection</h3>
+      <p>Classifies hand gestures using a webcam feed and OpenCV.</p>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <h2>Education</h2>
+    <div class="education">
+      <strong>B.Tech in Computer Science</strong>
+      <p>Jaypee University, 2023–2027</p>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <h2>Experience</h2>
+    <div class="experience">
+      <strong>Software Developer Intern - ABC Corp</strong>
+      <p>June 2024 – August 2024</p>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact</h2>
+    <p>Email: XYZ@gmail.com</p>
+    <p>Phone: +91-1234123450</p>
+    <div>
+      <a class="btn" href="https://github.com" target="_blank">GitHub</a>
+      <a class="btn" href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a class="btn" href="resume.pdf" download>Download Resume</a>
+    </div>
+  </section>
+</body>
+</html>

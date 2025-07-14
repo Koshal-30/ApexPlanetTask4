@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color, #f4f4f4);
+      color: var(--text-color, #333);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #3498db;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+    nav {
+      background: #2980b9;
+      text-align: center;
+      padding: 0.75rem;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+    .controls {
+      max-width: 1200px;
+      margin: 1rem auto;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0 1rem;
+    }
+    select {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .products-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+      display: none;
+    }
+    .product-card.show {
+      transform: scale(1);
+      opacity: 1;
+      display: block;
+    }
+    .product-image img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 1rem;
+    }
+    .product-info h3 {
+      margin: 0.5rem 0;
+    }
+    .product-info p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .price {
+      color: #27ae60;
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+    .btn-buy {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #2ecc71;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+    .btn-buy:hover {
+      background: #27ae60;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Our Products</h1>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="todo.html">To-Do</a>
+  </nav>
+
+  <div class="controls">
+    <select id="categoryFilter" onchange="filterProducts()">
+      <option value="all">All Categories</option>
+      <option value="electronics">Electronics</option>
+      <option value="clothing">Clothing</option>
+      <option value="books">Books</option>
+    </select>
+
+    <select id="sortPrice" onchange="filterProducts()">
+      <option value="default">Sort by Price</option>
+      <option value="asc">Low to High</option>
+      <option value="desc">High to Low</option>
+    </select>
+  </div>
+
+  <section class="products-container" id="productContainer">
+    <div class="product-card electronics" data-price="2999">
+      <div class="product-image"><img src="headphones.jpg" alt="Bluetooth Headphones"></div>
+      <div class="product-info"><h3>Bluetooth Headphones</h3><p>Wireless and noise-cancelling.</p><div class="price">₹2999</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card clothing" data-price="3499">
+      <div class="product-image"><img src="jacket.jpg" alt="Stylish Jacket"></div>
+      <div class="product-info"><h3>Stylish Jacket</h3><p>Warm and fashionable.</p><div class="price">₹3499</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card books" data-price="299">
+      <div class="product-image"><img src="jsbook.jpg" alt="JS Book"></div>
+      <div class="product-info"><h3>Learning JavaScript</h3><p>Become a JS expert.</p><div class="price">₹299</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card electronics" data-price="1999">
+      <div class="product-image"><img src="smartwatch.jpg" alt="Smart Watch"></div>
+      <div class="product-info"><h3>Smart Watch</h3><p>Track fitness and messages.</p><div class="price">₹1999</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card books" data-price="399">
+      <div class="product-image"><img src="pythonbook.jpg" alt="Python Book"></div>
+      <div class="product-info"><h3>Python Crash Course</h3><p>Start programming fast.</p><div class="price">₹399</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card clothing" data-price="799">
+      <div class="product-image"><img src="sneakers.jpg" alt="Sneakers"></div>
+      <div class="product-info"><h3>Trendy Sneakers</h3><p>Comfortable and stylish.</p><div class="price">₹799</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card electronics" data-price="9499">
+      <div class="product-image"><img src="ipad.jpg" alt="Tablet"></div>
+      <div class="product-info"><h3>Mini Tablet</h3><p>Perfect for reading and browsing.</p><div class="price">₹9499</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card books" data-price="399">
+      <div class="product-image"><img src="aibook.jpg" alt="AI Book"></div>
+      <div class="product-info"><h3>AI Basics</h3><p>Introduction to AI and ML.</p><div class="price">₹399</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card clothing" data-price="1199">
+      <div class="product-image"><img src="denim.jpg" alt="Denim Jeans"></div>
+      <div class="product-info"><h3>Denim Jeans</h3><p>Casual and durable wear.</p><div class="price">₹1199</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card electronics" data-price="2799">
+      <div class="product-image"><img src="speaker.jpg" alt="Portable Speaker"></div>
+      <div class="product-info"><h3>Portable Speaker</h3><p>Rich sound, great portability.</p><div class="price">₹2799</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card books" data-price="699">
+      <div class="product-image"><img src="dsabook.jpg" alt="Data Structures"></div>
+      <div class="product-info"><h3>Data Structures</h3><p>Essential for coding interviews.</p><div class="price">₹699</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card clothing" data-price="999">
+      <div class="product-image"><img src="hoodie.jpg" alt="Hoodie"></div>
+      <div class="product-info"><h3>Winter Hoodie</h3><p>Warm and trendy look.</p><div class="price">₹999</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card electronics" data-price="5999">
+      <div class="product-image"><img src="console.jpg" alt="Gaming Console"></div>
+      <div class="product-info"><h3>Gaming Console</h3><p>Immersive gaming experience.</p><div class="price">₹5999</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card books" data-price="399">
+      <div class="product-image"><img src="frontend.jpg" alt="React Book"></div>
+      <div class="product-info"><h3>Mastering React</h3><p>Frontend development in depth.</p><div class="price">₹399</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+    <div class="product-card clothing" data-price="1599">
+      <div class="product-image"><img src="shoes.jpg" alt="Formal Shoes"></div>
+      <div class="product-info"><h3>Formal Shoes</h3><p>Elegance meets comfort.</p><div class="price">₹1599</div><a href="#" class="btn-buy">Buy Now</a></div>
+    </div>
+      <div class="product-card electronics" data-price="4999">
+      <div class="product-image"><img src="drone.jpg" alt="Drone"></div>
+      <div class="product-info">
+        <h3>Quadcopter Drone</h3>
+        <p>High-flying fun with HD camera.</p>
+        <div class="price">₹4999</div>
+        <a href="#" class="btn-buy">Buy Now</a>
+      </div>
+    </div>
+  <script>
+    function filterProducts() {
+      const category = document.getElementById('categoryFilter').value;
+      const sortOrder = document.getElementById('sortPrice').value;
+
+      let items = Array.from(document.querySelectorAll('.product-card'));
+
+      // Filter
+      items.forEach(item => {
+        const matchesCategory = category === 'all' || item.classList.contains(category);
+        item.classList.remove('show');
+        item.style.display = 'none';
+        if (matchesCategory) {
+          item.style.display = 'block';
+          setTimeout(() => item.classList.add('show'), 10);
+        }
+      });
+
+      // Sort within visible items only
+      if (sortOrder !== 'default') {
+        const container = document.getElementById('productContainer');
+        const visibleItems = items.filter(item => {
+          return item.style.display !== 'none';
+        });
+
+        visibleItems.sort((a, b) => {
+          const priceA = parseInt(a.getAttribute('data-price'));
+          const priceB = parseInt(b.getAttribute('data-price'));
+          return sortOrder === 'asc' ? priceA - priceB : priceB - priceA;
+        });
+
+        container.innerHTML = '';
+        visibleItems.forEach(item => container.appendChild(item));
+      }
+    }
+
+    window.onload = () => {
+      filterProducts();
+    };
+  </script>
+</body>
+</html>
